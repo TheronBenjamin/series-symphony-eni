@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>{{ mySeries.title }}</h1>
+
+{% set colors = ['blue', 'green', 'pink', 'brown'] %}
+    {% for c in colors %}
+        <p style="background-color: {{ c }}; color:white;">{{ c }}</p>
+    {% endfor %}
+{% endblock %}

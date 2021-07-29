@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Series {% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" href="{{ asset('img/carotte.png') }}">
+    {% block extraStyles %}{% endblock %}
+</head>
+<body>
+<header>
+    <h1><a href="{{ path('main_home') }}"><img width="400" src="{{ asset('img/logo.svg') }}" alt="Series!"></a></h1>
+    {% include('inc/nav.html.twig') %}
+</header>
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<main>
+    {% block body %} {% endblock %}
+</main>
+<footer>
+    {% include('inc/nav.html.twig') %}
+    <p>&copy; {{'now'| date('Y') }} Series</p>
+</footer>
+</body>
+</html>

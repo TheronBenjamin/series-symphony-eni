@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{serie.name}} |{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="serie-display">
+        <div>
+            <img src="{{ asset('img/posters/series/'~ serie.poster) }}" alt="{{ serie.name }}">
+        </div>
+        <div class="serie-informations">
+            <h2>{{serie.name}}</h2>
+            <p>User Rating : {{ serie.vote }}</p>
+            <p>Categorized in : {{ serie.genres }}</p>
+            <p>Serie status : {{ serie.status }}</p>
+            <p>Aired from : {{ serie.firstAirDate|date('Y-m-d') }} to {{ serie.lastAirDate|date('Y-d-m') }}</p>
+            <p>{{ serie.overview|nl2br }}</p>
+            <section>
+                <h3>Seasons</h3>
+                {% for season in serie.seasons %}
+                <article class="seasons">
+                    <img width="200" src="{{ asset('img/posters/seasons/'~ season.poster ) }}" alt="{{ serie.name }} season # {{ season.number }}"></img>
+                    <div class="season-details">
+                        <h4>Season {{ season.number }}</h4>
+                        {% if season.overview %}
+                            <div>{{ season.overview }}</div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+        </div>
+    </div>
+    {% block extraStyles %}
+        <style>
+            body{
+                background: no-repeat fixed;
+                background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)),url("{{ asset('img/backdrops/' ~ serie.backdrop) }}");
+            }
+        </style>
+    {% endblock %}
+
+{% endblock %}
+
